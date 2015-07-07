@@ -1,0 +1,7 @@
+dizFranc.py
+serverTree
+*.zip
+*.pdf
+__pycache__
+*.pyc
+node_modules
