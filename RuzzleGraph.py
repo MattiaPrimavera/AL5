@@ -62,7 +62,7 @@ class RuzzleGraph:
         for vertex in self.vertexList:
             if vertex.value == mot[0]:
                 #print("On considere V = " + str(vertex.value))
-                if self.motEstDansGrapheN(mot, vertex, 0, None) is True:
+                if self.motEstDansGrapheN(mot, vertex, "", None) is True:
                     return True
                 
             """elif vertex.value == '*':
@@ -70,20 +70,19 @@ class RuzzleGraph:
                     return True"""
         return False
 
-    def motEstDansGrapheN(self, mot, n, i, listeDejaVisite):
-        #print("i : " + str(i) + " ---> " + mot[i])
+    def motEstDansGrapheN(self, mot, n, chainePartielle, listeDejaVisite):
         # on a trouve un mot, on l'insere dans la grille
-        if i == len(mot):
-            print("On a trouve le mot: " + mot)
-            #self.listeMotsDansGrille.insert(mot)
+        i = len(chainePartielle)
+        if chainePartielle == mot:
+            #print("On a trouve le mot: " + mot)
             return True
 
         # initialisation listeDejaVisite
         if i == 0:
             if mot[0] == n.value:
-                print(str(n.value) + " est le BON: " + str(n.compteur))
+                #print(str(n.value) + " est le BON: " + str(n.compteur))
                 listeDejaVisite = [n]
-                self.motEstDansGrapheN(mot, n, 1, listeDejaVisite)
+                return self.motEstDansGrapheN(mot, n, chainePartielle + str(n.value), listeDejaVisite)
             else:
                 return False
 
@@ -95,24 +94,22 @@ class RuzzleGraph:
         else:  # cas i != 0, on a deja trouve le premier caractere du mot
             bonVoisin = False
             for vertex in n.listeAdjacences:
-                #if vertex.compteur == 11:
-                #    print([vel.value for vel in n.listeAdjacences])
-                #if n.value == 't':
-                #    print([vertex.value for vertex in n.listeAdjacences])
-                #    print(n.compteur)
-                #print("voisin : " + str(vertex.value))
-                #print("DEJA-VISIT: " + str(vertex in listeDejaVisite))
-                print("i : " + str(i) + " --> vertex.value : " + vertex.value + " -- mot[i]: " + mot[i])
+                #print("i : " + str(i) + " --> vertex.value : " + vertex.value + " -- mot[i]: " + mot[i])
                 if vertex.value == mot[i] and vertex not in listeDejaVisite:
                     bonVoisin = True
-                    print(str(vertex.value) + " est le BON: " + str(vertex.compteur))
+                    #print(str(vertex.value) + " est le BON: " + str(vertex.compteur))
                     nouvelleDejaVisite = [el for el in listeDejaVisite]
                     nouvelleDejaVisite.append(vertex)
+                
                     # on verifie la presence du carac suivant dans le graphe
-                    self.motEstDansGrapheN(
-                        mot, vertex, i + 1, nouvelleDejaVisite  )
-            #if bonVoisin == False:
-            #    return False
+                    result = self.motEstDansGrapheN(mot, vertex, chainePartielle + str(vertex.value), nouvelleDejaVisite)
+                    if result is True:
+                        return True
+                    else:
+                        continue
+
+            if bonVoisin == False:
+                return False
             """elif vertex.value == '*':
                 nouvelleDejaVisite = []+listeDejaVisite
                 nouvelleDejaVisite.append(vertex)
@@ -121,7 +118,7 @@ class RuzzleGraph:
             """
 
 
-"""    def motEstDansGrapheN(self, mot, n, i, listeDejaVisite):
+    """    def motEstDansGrapheN(self, mot, n, i, listeDejaVisite):
         #print("i : " + str(i) + " ---> " + mot[i])
         # on a trouve un mot, on l'insere dans la grille
         if i == len(mot):
@@ -170,7 +167,7 @@ class RuzzleGraph:
             #    return self.motEstDansGrapheN(
             #        mot, vertex, i + 1, nouvelleDejaVisite)
             
-"""
+    """
     def rechercheMot(self, parcourDictionnaire, mot):
         self.dictionnairePy = ArbreLex(parcourDictionnaire)
         # self.dictionnairePy.chargeDictionnaire(parcourDictionnaire)
@@ -468,8 +465,8 @@ if __name__ == "__main__":
     ruzzleGraph = RuzzleGraph(graph, ArbreLex("ressources/dictEn"))
     ruzzleGraph.affichageTableRuzzle()
 
-    #ruzzleGraph.generationM1b("ressources/dictEn", False)
-    #ruzzleGraph.generationM2(ruzzleGraph, "ressources/dictEn", False)
+    ruzzleGraph.generationM1b("ressources/dictEn", False)
+    ruzzleGraph.generationM2(ruzzleGraph, "ressources/dictEn", False)
     #ruzzleGraph.rechercheMot("ressources/dictEn", "ninetieth")
-    print(ruzzleGraph.motEstDansGraphe("ninetieth"))
+    #print(ruzzleGraph.motEstDansGraphe("ninetiethzzz"))
 
