@@ -1,11 +1,18 @@
 #!/usr/bin/python3
 
 import socket
+
+"""
+Classe qui recherche la presence d'un mot dans le dictionnaire en s'appuyant
+sur le Dictionnaire Serveur (ecrit en langage C qui doit avoir ete' prealablement active')
+"""
+
 class ClientDictionnaire:
+
 	def __init__(self, port):
-		self.client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)	
+		self.client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		self.client_socket.connect(('localhost', port))
-	
+
 	def estDans(self, mot):
 		data = mot+"\0"
 		b = data.encode('utf-8')

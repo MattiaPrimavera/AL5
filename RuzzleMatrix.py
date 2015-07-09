@@ -1,11 +1,40 @@
 #!/usr/bin/python3
 from Vertex import *
 import random
+
+
+"""
+Classe Outilitaire pour la construction du graphe representant le plateau du jeu
+"""
 class RuzzleMatrix:
 	def __init__(self, langue):
-		self.grille = self.chaineToGrilleMatrix(self.generateChaine(langue))
+		#self.chaine = self.generateChaine(langue)
+		self.chaine = "sqeeetinihtznarfotierope"
+
+		self.grille = self.chaineToGrilleMatrix(self.chaine)
 		self.vertexMatrix = self.grilleToVertexMatrix()
 
+	"""
+	Construction du Graphe à partir d'une matrice d'objets Vertex
+	"""
+	def vertexMatrixToGraph(self):
+		graph = list()
+		for i in range(0, 4):
+			for j in range(0, 7):
+				if (i,j) in [(0,0),(0,6),(3,0),(3,6)]:
+					continue
+				else:
+					graph.append(self.vertexMatrix[i][j])
+					listeVoisins = self.listeAdjacences(i, j, self.directionTriangle(i,j))
+					#print(self.vertexMatrix[i][j].value, " VV--> ",self.directionTriangle(i,j), " ", listeVoisins)
+					for (m,n) in listeVoisins:
+						self.vertexMatrix[i][j].ajouteAdjacence(self.vertexMatrix[m][n])
+		return graph
+
+	"""Generation de la chaine de caracteres a mettre dans le plateau,
+		la chaine est genere' selon une table regroupante la percentage
+		d'occurrence dans un texte de chaque lettre de la langue concernee
+	"""
 	def generateChaine(self, dictionnaireOccurrances):
 		if dictionnaireOccurrances == "en":
 			tableOccurranceEn = {'A':8,'B':2,'C':3,'D':4,'E':11,'F':2,'G':2,'H':5,'I':7,'J':1,'K':1,'L':4,'M':3,'N':7,'O':7,'P':2,'Q':1,'R':6,'S':6,'T':9,'U':3,'V':1,'W':2, 'X':1, 'Y':1, 'Z':1, '#':4, '*': 4}
@@ -32,7 +61,8 @@ class RuzzleMatrix:
 				r = random.randint(0,107)
 				mot.append(listeLettres[r])
 			result = ''.join(mot).lower()
-			return result			
+			return result
+
 	def grilleToVertexMatrix(self):
 		vertexMatrix = list()
 		for i in range(0, len(self.grille)):
@@ -48,14 +78,13 @@ class RuzzleMatrix:
 			print("")
 		print("")
 
-
-	def chaineToGrilleMatrix(self, chaine):	
+	def chaineToGrilleMatrix(self, chaine):
 		grille = [[],[],[],[]]
 		for i in range(0,len(chaine)+4):
 			if i in [0,6]:
 				grille[0].append('#')
 			elif i in [21,27]:
-				grille[3].append('#')  
+				grille[3].append('#')
 			elif i < 6:
 				grille[0].append(chaine[i-1])
 			elif i < 14:
@@ -92,18 +121,3 @@ class RuzzleMatrix:
 			return "haut"
 		else:
 			return "bas"
-
-	def vertexMatrixToGraph(self):
-		graph = list()
-		for i in range(0, 4):
-			for j in range(0, 7):
-				if (i,j) in [(0,0),(0,6),(3,0),(3,6)]:
-					continue
-				else:
-					graph.append(self.vertexMatrix[i][j])
-					listeVoisins = self.listeAdjacences(i, j, self.directionTriangle(i,j))
-					#print(self.vertexMatrix[i][j].value, " VV--> ",self.directionTriangle(i,j), " ", listeVoisins)
-					for (m,n) in listeVoisins:
-						self.vertexMatrix[i][j].ajouteAdjacence(self.vertexMatrix[m][n])
-		return graph
-

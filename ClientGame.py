@@ -2,7 +2,10 @@
 import socket
 import sys
 from ListeMots import *
+
+
 class ClientGame:
+
 	def __init__(self, tcpServerAddress, tcpServerPort, ruzzleGraph):
 		self.tcpServerPort = tcpServerPort
 		self.tcpServerAddress = tcpServerAddress
