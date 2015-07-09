@@ -32,41 +32,60 @@ def main():
     ruzzle = RuzzleMatrix(langue)
     grafoRuzzle = RuzzleGraph(ruzzle.vertexMatrixToGraph(), None)
 
-    if sys.argv[1] == "-m1":  # methode 1 (ArbreLexServeur C)
+    # methode 1 (ArbreLexServeur C)
+    if sys.argv[1] == "-m1":  
+        grafoRuzzle.affichageTableRuzzle()
+        print("\n\n")
+
         grafoRuzzle.dictionnaire = ClientDictionnaire(int(sys.argv[2]))
         grafoRuzzle.generationM1(True)
-    elif sys.argv[1] == "-m1b":  # methode 1b (ArbreLex en Python)
+    
+    # methode 1b (ArbreLex en Python)
+    elif sys.argv[1] == "-m1b":  
+        grafoRuzzle.affichageTableRuzzle()
+        print("\n\n")
         grafoRuzzle.generationM1b(parcourDictionnaire, True)
-    elif sys.argv[1] == "-m2":  # methode 2 (ArbreLex en Python)
+    
+    # methode 2 (ArbreLex en Python)
+    elif sys.argv[1] == "-m2":  
+        grafoRuzzle.affichageTableRuzzle()
+        print("\n\n")
         grafoRuzzle.generationM2(grafoRuzzle, parcourDictionnaire, True)
+
+    # Statistiques - Comparation de performances m1 - m1b - m2    
     elif sys.argv[1] == "-s":
         grafoRuzzle.dictionnaire = ClientDictionnaire(int(sys.argv[2]))
         grafoRuzzle.affichageTableRuzzle()
-        # execution M1
+        
         print("Methode 1 (ArbreLexServeur C) --> ")
         grafoRuzzle.generationM1(False)
-        
-        # execution M1b
+        grafoRuzzle.listeMotsDansGrille = ListeMots()
+
         print("Methode 1b (ArbreLex Python) --> ")
         grafoRuzzle.generationM1b(parcourDictionnaire, False)
+        grafoRuzzle.listeMotsDansGrille = ListeMots()
     
-        # execution M2
         print("\nMethode 2 (Py - Parcours Diction) --> ")
         grafoRuzzle.generationM2(grafoRuzzle, parcourDictionnaire, False)
     
-    elif sys.argv[1] == "-server": #Multiplayer Mode - Server Side
+    #Multiplayer Mode - Server Side
+    elif sys.argv[1] == "-server": 
         print("Generation Liste Mots A Trouver...")
         grafoRuzzle.generationM2(grafoRuzzle, parcourDictionnaire, False)
         print("\nEn attente de connexion pour une defi!")
         serverGame = ServerGame('localhost', int(sys.argv[2]), grafoRuzzle)
         serverGame.waitForOpponent()
-    elif sys.argv[1] == "-client": #Multiplayer Mode - Client Side
+    
+    #Multiplayer Mode - Client Side
+    elif sys.argv[1] == "-client": 
         print("Generation Liste Mots A Trouver...")
         grafoRuzzle.generationM2(grafoRuzzle, parcourDictionnaire, False)
         clientGame = ClientGame(sys.argv[2], int(sys.argv[3]), grafoRuzzle)
         temps = int(input("saisir temps du defi : "))
         clientGame.sendChallenge(temps)
-    else: #mode Single Player
+
+    #mode Single Player
+    else: 
         dictionnaire = ArbreLex('-')
         dictionnaire.chargeDictionnaire(parcourDictionnaire)
         dictionnaire.generePossiblesMots(grafoRuzzle)

@@ -251,9 +251,8 @@ class RuzzleGraph:
                 if v.value == '*':
                     continue
                 else:
-                    print("PART: " + chainePartielle + str(v.value))
-                    resultatRecherche = self.dictionnairePy.estDans(
-                        chainePartielle + str(v.value))
+                    #print("PART: " + chainePartielle + str(v.value))
+                    resultatRecherche = self.dictionnairePy.estDans(chainePartielle + str(v.value))
                     
                     if resultatRecherche == 0:
                         continue
@@ -261,22 +260,18 @@ class RuzzleGraph:
                         nouvelleDejaVisite = list()
                         nouvelleDejaVisite = [i for i in listeDejaVisite]
                         nouvelleDejaVisite.append(v)
-                        self.DFSVisitPy(
-                            v, chainePartielle + str(v.value), nouvelleDejaVisite)
+                        self.DFSVisitPy(v, chainePartielle + str(v.value), nouvelleDejaVisite)
                     elif resultatRecherche == 2:
                         nouvelleDejaVisite = [i for i in listeDejaVisite]
                         nouvelleDejaVisite.append(v)
-                        print("On a trouve : " + chainePartielle + str(v.value))
+                        #print("On a trouve : " + chainePartielle + str(v.value))
                         # on a trouve un mot
-                        self.listeMotsDansGrille.insert(
-                            chainePartielle + str(v.value))
-                        self.DFSVisitPy(
-                            v, chainePartielle + str(v.value), nouvelleDejaVisite)
+                        self.listeMotsDansGrille.insert(chainePartielle + str(v.value))
+                        self.DFSVisitPy(v, chainePartielle + str(v.value), nouvelleDejaVisite)
                     elif resultatRecherche == 3:
                         # on a trouve un mot
-                        print("On a trouve : " + chainePartielle + str(v.value))
-                        self.listeMotsDansGrille.insert(
-                            chainePartielle + str(v.value))
+                        #print("On a trouve : " + chainePartielle + str(v.value))
+                        self.listeMotsDansGrille.insert(chainePartielle + str(v.value))
 
                 """    for i in range(97, 123):
                         resultatRecherche = self.dictionnairePy.estDans(
@@ -433,8 +428,12 @@ class RuzzleGraph:
         start_time = time.time()
         self.DFS()
         end_time = time.time()
+        
         print("Execution Time -> ", end_time - start_time)
         print("Mots Trouves: " + str(self.listeMotsDansGrille.len()) + "\n")
+        if bool_print is True:
+            self.listeMotsDansGrille.printDecroissant()
+          
 
     """resolution ruzzle via Py-ServerTree"""
     def generationM1b(self, parcourDictionnaire, bool_print):
@@ -444,7 +443,8 @@ class RuzzleGraph:
 
         print("Execution Time -> ", end_time - start_time)
         print("Mots Trouves: " + str(self.listeMotsDansGrille.len()) + "\n")
-        self.listeMotsDansGrille.printDecroissant()
+        if bool_print is True:
+            self.listeMotsDansGrille.printDecroissant()
 
     """resolution ruzzle via methode 2 (on verifie la presence de chaque mot du Dictionnaire dans la grille)"""
     def generationM2(self, ruzzleGraph, parcourDictionnaire, bool_print):
@@ -452,10 +452,11 @@ class RuzzleGraph:
         start_time = time.time()
         listeMotsDansGrille = dictionnaire.generePossiblesMots(ruzzleGraph)
         end_time = time.time()
-        listeMotsDansGrille.printDecroissant()
-
+        
         print("Execution Time -> ", end_time - start_time)
         print("Mots Trouves: " + str(listeMotsDansGrille.len()) + "\n")
+        if bool_print is True:
+            listeMotsDansGrille.printDecroissant()
 
 
 if __name__ == "__main__":
