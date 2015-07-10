@@ -62,11 +62,11 @@ def main():
         grafoRuzzle.listeMotsDansGrille = ListeMots()
 
         print("Methode 1b (ArbreLex Python) --> ")
-        grafoRuzzle.generationM1b(parcourDictionnaire, True)
+        grafoRuzzle.generationM1b(parcourDictionnaire, False)
         grafoRuzzle.listeMotsDansGrille = ListeMots()
     
         print("\nMethode 2 (Py - Parcours Diction) --> ")
-        grafoRuzzle.generationM2(grafoRuzzle, parcourDictionnaire, True)
+        grafoRuzzle.generationM2(grafoRuzzle, parcourDictionnaire, False)
     
     #Multiplayer Mode - Server Side
     elif sys.argv[1] == "-server": 
