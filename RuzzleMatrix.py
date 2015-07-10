@@ -8,8 +8,9 @@ Classe Outilitaire pour la construction du graphe representant le plateau du jeu
 """
 class RuzzleMatrix:
 	def __init__(self, langue):
-		self.chaine = self.generateChaine(langue)
-		#self.chaine = "sqeeetinihtznarfotierope"
+		#self.chaine = self.generateChaine(langue)
+		self.chaine = "#####sinihtheqnfot*#####"
+		#self.chaine = "#####si*################"
 
 		self.grille = self.chaineToGrilleMatrix(self.chaine)
 		self.vertexMatrix = self.grilleToVertexMatrix()
