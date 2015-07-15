@@ -5,3 +5,4 @@ serverTree
 __pycache__
 *.pyc
 node_modules
+arbreLexServer
