@@ -1,13 +1,14 @@
 #!/usr/bin/python3
 
-"""Une ListeMots sous forme de dictionnaire qui regroupe les mots par leur longeur et s'assure de leur unicite'"""
+"""Une ListeMots sous forme de dictionnaire qui regroupe les mots par leur longeur et s'assure de leur unicité"""
+
 class ListeMots:
 
     def __init__(self):
         self.listeMots = dict()
         self.longeur = 0
 
-    #methodes de construction et recherche
+    # methodes de construction et recherche
     def len(self):
         return self.longeur
 
@@ -31,7 +32,7 @@ class ListeMots:
         except KeyError:
             return False
 
-    #methodes d'affichage
+    # methodes d'affichage
     def printCroissant(self):
         #print("Mots Trouvees:")
         for string in self.listeMots[3]:
@@ -39,7 +40,6 @@ class ListeMots:
         print("")
         for string in self.listeMots[4]:
             print(string + ", ", end='')
-
 
     def printDecroissant(self):
         if self.longeur == 0:
@@ -57,8 +57,7 @@ class ListeMots:
                 print(string + ", ", end='')
         print("")
 
-
-    #methodes de gestion du Jeu en mode Multiplayer
+    # methodes de gestion du Jeu en mode Multiplayer
     def compressToSend(self):
         liste_indices = [cle for cle in self.listeMots.keys()]
         liste_indices.sort()

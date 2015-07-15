@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 
-
 class Vertex:
     compteur = 0
 

@@ -1,9 +1,11 @@
 #!/usr/bin/python3
+
 from ListeMots import *
 import time
 from ArbreLex import *
 from RuzzleMatrix import *
 import pickle
+
 
 class RuzzleGraph:
 
@@ -14,7 +16,7 @@ class RuzzleGraph:
         self.listeMotsDansGrille = ListeMots()
         self.listeTrouvees = ListeMots()
 
-    #methodes de construction et affichage
+    # methodes de construction et affichage
     def ajouteVertex(self, vertex):
         self.vertexList.append(vertex)
 
@@ -58,12 +60,13 @@ class RuzzleGraph:
         print("")
 
     """Verification presence du mot dans la grille Ruzzle (pour methode 2)"""
+
     def motEstDansGraphe(self, mot):
         for vertex in self.vertexList:
             if vertex.value == mot[0] or vertex.value == '*':
                 if self.motEstDansGrapheN(mot, vertex, "", None) is True:
                     return True
-                
+
         return False
 
     def motEstDansGrapheN(self, mot, n, chainePartielle, listeDejaVisite):
@@ -98,7 +101,7 @@ class RuzzleGraph:
                     bonVoisin = True
                     nouvelleDejaVisite = [el for el in listeDejaVisite]
                     nouvelleDejaVisite.append(vertex)
-                
+
                     # on verifie la presence du caractere suivant dans le graphe
                     result = self.motEstDansGrapheN(mot, vertex, str(chainePartielle) + str(vertex.value), nouvelleDejaVisite)
                     if result is True:
@@ -112,12 +115,12 @@ class RuzzleGraph:
                         result = self.motEstDansGrapheN(mot, vertex, str(chainePartielle) + str(chr(car)), nouvelleDejaVisite)
                         if result is True:
                             return True
- 
+
             if bonVoisin == False:
                 return False
-            
 
     """Solution Ruzzle via Dictionnaire Python (DFS sur le graphe + verification presence mot non distribuee')"""
+
     def DFSPy(self, parcourDictionnaire):
         self.dictionnairePy = ArbreLex(parcourDictionnaire)
         # self.dictionnairePy.chargeDictionnaire(parcourDictionnaire)
@@ -126,7 +129,7 @@ class RuzzleGraph:
                 for i in range(97, 123):
                     if self.dictionnairePy.estDans(str(chr(i))) == 1:
                         self.DFSVisitPy(v, str(chr(i)), None)
-            
+
             if self.dictionnairePy.estDans(v.value) == 1:
                 self.DFSVisitPy(v, str(v.value), None)
 
@@ -167,7 +170,7 @@ class RuzzleGraph:
 
                 else:
                     resultatRecherche = self.dictionnairePy.estDans(chainePartielle + str(v.value))
-                    
+
                     if resultatRecherche == 0:
                         continue
                     elif resultatRecherche == 1:
@@ -185,9 +188,8 @@ class RuzzleGraph:
                         # on a trouve un mot
                         self.listeMotsDansGrille.insert(chainePartielle + str(v.value))
 
-                
-
     """Solution Ruzzle via ServeurC (DFS sur le graphe + verification presence mot distribuee')"""
+
     def DFS(self):
         for v in self.vertexList:
             if v.value == '*':
@@ -196,7 +198,6 @@ class RuzzleGraph:
             elif self.dictionnaire.estDans(v.value) == 1:
                 self.DFSVisit(v, str(v.value), None)
 
-
     """
     Renvoie:
     0 -> pas dans l'arbre
@@ -204,6 +205,7 @@ class RuzzleGraph:
     2 -> mot est prefixe et mot
     3 -> est mot mais pas prefixe
     """
+
     def DFSVisit(self, vertex, chainePartielle, listeDejaVisite):
         # cas 0, on ajoute la premiere lettre du mot a la liste dejaVisite
         if listeDejaVisite == None:
@@ -263,8 +265,7 @@ class RuzzleGraph:
                         self.listeMotsDansGrille.insert(
                             chainePartielle + str(v.value))
 
-
-    #methodes de gestion du Jeu en mode Multiplayer
+    # methodes de gestion du Jeu en mode Multiplayer
     def gererFinMatch(self, listeTrouvees):
         print("Time's UP!!!")
         if listeTrouvees.len() > 0:
@@ -309,21 +310,21 @@ class RuzzleGraph:
             if self.listeMotsDansGrille.estDans(mot):
                 self.listeTrouvees.insert(mot)
 
-
-    #methodes de Resolution automatique du Ruzzle
+    # methodes de Resolution automatique du Ruzzle
     """resolution ruzzle via C-ServerTree"""
+
     def generationM1(self, bool_print):
         start_time = time.time()
         self.DFS()
         end_time = time.time()
-        
+
         print("Execution Time -> ", end_time - start_time)
         print("Mots Trouves: " + str(self.listeMotsDansGrille.len()) + "\n")
         if bool_print is True:
             self.listeMotsDansGrille.printDecroissant()
-          
 
     """resolution ruzzle via Py-ServerTree"""
+
     def generationM1b(self, parcourDictionnaire, bool_print):
         start_time = time.time()
         self.DFSPy(parcourDictionnaire)
@@ -335,12 +336,13 @@ class RuzzleGraph:
             self.listeMotsDansGrille.printDecroissant()
 
     """resolution ruzzle via methode 2 (on verifie la presence de chaque mot du Dictionnaire dans la grille)"""
+
     def generationM2(self, ruzzleGraph, parcourDictionnaire, bool_print):
         dictionnaire = ArbreLex(parcourDictionnaire)
         start_time = time.time()
         listeMotsDansGrille = dictionnaire.generePossiblesMots(ruzzleGraph)
         end_time = time.time()
-        
+
         print("Execution Time -> ", end_time - start_time)
         print("Mots Trouves: " + str(listeMotsDansGrille.len()) + "\n")
         if bool_print is True:
@@ -358,4 +360,3 @@ if __name__ == "__main__":
     #ruzzleGraph.generationM2(ruzzleGraph, "ressources/dictEn", False)
     #ruzzleGraph.rechercheMot("ressources/dictEn", "ninetieth")
     print(ruzzleGraph.motEstDansGraphe("it"))
-

@@ -1,5 +1,7 @@
 #!/usr/bin/python3
+
 from ListeMots import *
+
 
 class ArbreLex:
 
@@ -13,6 +15,7 @@ class ArbreLex:
         return self.listeMotsDansGrille
 
     """Methodes Construction de l'arbre"""
+
     def ajouteFils(self, lettre, noeud):
         n = Noeud(lettre, None, None)
         if noeud.fils is None:
@@ -28,9 +31,9 @@ class ArbreLex:
     def estDans(self, mot):
         ptr = self.noeudRoot
         for i in range(0, len(mot)):
-#            print(mot[i])
-#            if mot[i] == 's':
-#                print(self.printFils(ptr))
+            #print(mot[i])
+            #if mot[i] == 's':
+            #    print(self.printFils(ptr))
             ptr = self.estFilsDe(mot[i], ptr)
             if ptr is None:
                 return 0
@@ -78,6 +81,7 @@ class ArbreLex:
             self.ajouteMot(ligne[0:len(ligne) - 1])
 
     """Fonctions de recherche"""
+
     def rechercheMot(self, mot):
         ptr = self.noeudRoot
         for car in mot:
@@ -91,9 +95,8 @@ class ArbreLex:
         else:
             return False
 
-
-
     """Imprime tous les mots contenus dans l'arbre lexicographique a l'ecran"""
+
     def parcourPrintArbre(self, mot, n):
         ptr = n.fils
         while ptr is not None:
@@ -122,6 +125,7 @@ class Noeud:
         self.car = car
         self.fils = fils
         self.frere = frere
+
 
 def main():
     a = ArbreLex("ressources/dictEn")
