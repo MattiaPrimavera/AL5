@@ -10,6 +10,12 @@
 # ./start.sh -s
 
 case "$1" in
+    "fr")
+    python3 main.py fr;
+    ;;
+    "en")
+	python3 main.py en;
+	;;
     "-m1" )
         echo "Starting C-Server Dictionary";
         gcc arbreLexServer.c -o arbreLexServer;

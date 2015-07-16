@@ -43,8 +43,6 @@ int main(int argc, char** argv)
     arbre->frereSuivant = NULL;
 
     chargeDictionnaire(argv[2], arbre);
-    //printf("recherche zoo = %d\n", rechercheMot("zoo", arbre));
-    //parcourPrint("", arbre);
 
     //PARTIE SERVEUR DU DICTIONNAIRE
     int sockfd;
@@ -87,12 +85,9 @@ int main(int argc, char** argv)
         recv(clientfd, buffer, MAXBUF, 0);
         /*---Echo back 0 if not present, 1 if present, 2 if prefix and mot---*/
         char* reponse = malloc(2 * sizeof(char));
-        //printf("recu -> %s\n", buffer);
         int resultatRecherche = rechercheMot(buffer, arbre);
-        //printf("resultatRecherche = %d\n", resultatRecherche);
         sprintf(reponse, "%d", resultatRecherche);
         send(clientfd, reponse, 1, 0);
-        /*---Close data connection---*/
     }
 
     /*---Clean up (should never get here!)---*/

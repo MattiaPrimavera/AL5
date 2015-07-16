@@ -89,7 +89,7 @@ def main():
 
     # mode Single Player
     else:
-        dictionnaire = ArbreLex('-')
+        dictionnaire = ArbreLex(parcourDictionnaire)
         dictionnaire.chargeDictionnaire(parcourDictionnaire)
         dictionnaire.generePossiblesMots(grafoRuzzle)
         grafoRuzzle.playOneMatch()

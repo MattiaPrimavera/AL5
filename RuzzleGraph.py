@@ -123,7 +123,6 @@ class RuzzleGraph:
 
     def DFSPy(self, parcourDictionnaire):
         self.dictionnairePy = ArbreLex(parcourDictionnaire)
-        # self.dictionnairePy.chargeDictionnaire(parcourDictionnaire)
         for v in self.vertexList:
             if v.value == '*':
                 for i in range(97, 123):
@@ -213,7 +212,6 @@ class RuzzleGraph:
         # on passe au prefix successif en ajoutant un voisin si le prefix
         # chainePartielle+voisin existe dans le dictio
         for v in vertex.listeAdjacences:
-            # print(vertex.compteur, " --> ", v.compteur," -> ",v.value," -> ", [v.value for v in v.listeAdjacences])
             # on s'assure de ne pas passer deux fois sur la meme lettre
             if v not in listeDejaVisite:
                 resultatRecherche = 0
@@ -356,7 +354,4 @@ if __name__ == "__main__":
     ruzzleGraph = RuzzleGraph(graph, ArbreLex("ressources/dictEn"))
     ruzzleGraph.affichageTableRuzzle()
 
-    #ruzzleGraph.generationM1b("ressources/dictEn", False)
-    #ruzzleGraph.generationM2(ruzzleGraph, "ressources/dictEn", False)
-    #ruzzleGraph.rechercheMot("ressources/dictEn", "ninetieth")
     print(ruzzleGraph.motEstDansGraphe("it"))

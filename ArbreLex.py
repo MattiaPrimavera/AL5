@@ -126,11 +126,3 @@ class Noeud:
         self.fils = fils
         self.frere = frere
 
-
-def main():
-    a = ArbreLex("ressources/dictEn")
-    #a.parcourPrintArbre("", a.noeudRoot)
-    #print(a.estDans("frothies"))
-
-if __name__ == "__main__":
-    main()
