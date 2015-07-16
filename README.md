@@ -2,16 +2,46 @@
 
 Ruzzle Implementation with Algorithm performance study
 
+## Requirements
+
+* gcc 
+* python3
+
 ## Usage
 
     chmod +x start.sh
 
-Execute one of the commands:
+To execute the single player mode use the following command:
 
-	./start.sh
+    ./start.sh
+    
+The exagonal grid will appear and you'll be prompted to choose how many seconds you want the challenge to last: find all the words you can by writing them one by one on your keyboard and validating through the **Enter** Key.
+
+For the multiplayer (local) mode, run the server:
+
+    ./start.sh -server tcpServerPort
+
+then the client in another terminal window:
+
+    ./start.sh -client serverAddress tcpPort 
+
+You can also run the automatic solver for each approach studied, so that:
+    
     ./start.sh -m1
+
+will generate a new grid and solve it by using the first approach (check the **Approaches** section of this document) through the Tree-Server Dictionnary written in C language.
+By executing
+
     ./start.sh -m1b
+
+the grid will still be solved by using the first approach but this time through the Lexicographic-Tree written in Python language.
+
+And finally you can execute the second approach to find all the words hidden by executing (this time the entire solution has been written in Python):
+
     ./start.sh -m2
+
+If you wanna make check 
+
     ./start.sh -s 
 
 ## Synopsis
@@ -19,18 +49,6 @@ Execute one of the commands:
 This project is a modified version of the Ruzzle videogame where you have to find the most of the words hidden inside the grid you can, and in a limited lapse of time.
 
 In this implementation the grid has exagonal shape and cases can contain walls ('#' character), which cannot be used in the sequence of letters to form a "discovered word", and jolly characters ('*'), which can be used as no matter the letter we need.   
-
-Starting the game with
-	
-	./start.sh
-
-will make the single player mode start: you'll face the grid and have to choose how many seconds you want the challenge to last.
-
-Multiplayer local game is accessible by executing the following commands:
-
-	./start.sh -server tcpServerPort
-	./start.sh -client serverAddress tcpPort 
-
 
 ## Algorithms
 
