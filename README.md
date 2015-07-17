@@ -46,7 +46,22 @@ If you wanna have a visual comparison of the three strategies with execution tim
 
 Here's an execution example of last command:
 
+      /e\s/o\t/a\
+    /f\l/c\s/s\a/t\
+    \i/m\n/#\j/a\a/
+      \p/*\e/n\q/
 
+    Methode 1 (Lexicographic-Server-Tree C) --> 
+    Execution Time ->  1.2251019477844238
+    Mots Trouves: 467
+
+    Methode 1b (Lexicographic-Tree Python) --> 
+    Execution Time ->  7.571776866912842
+    Mots Trouves: 467
+
+    Methode 2 (Python) --> 
+    Execution Time ->  47.429091691970825
+    Mots Trouves: 467
 
 ## Synopsis
 
