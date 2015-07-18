@@ -15,7 +15,7 @@ To execute the single player mode use the following command:
 
     ./start.sh
     
-The exagonal grid will appear and you'll be prompted to choose how many seconds you want the challenge to last: find all the words you can by writing them one by one on your keyboard and validating through the `Enter` Key.
+The exagonal grid will appear and you'll be prompted to choose how many seconds you want the challenge to last: find all the words you can by writing them one by one on your keyboard and validating through the `Enter` key.
 
 For the multiplayer (local) mode, run the server:
 
