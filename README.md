@@ -4,7 +4,7 @@ Ruzzle Implementation with Algorithm performance study
 
 ## Requirements
 
-* gcc 
+* gcc
 * python3
 
 ## Usage
@@ -14,7 +14,7 @@ Ruzzle Implementation with Algorithm performance study
 To execute the single player mode use the following command:
 
     ./start.sh
-    
+
 The exagonal grid will appear and you'll be prompted to choose how many seconds you want the challenge to last: find all the words you can by writing them one by one on your keyboard and validating through the `Enter` key.
 
 For the multiplayer (local) mode, run the server:
@@ -23,10 +23,10 @@ For the multiplayer (local) mode, run the server:
 
 then the client in another terminal window:
 
-    ./start.sh -client serverAddress tcpPort 
+    ./start.sh -client serverAddress tcpPort
 
 You can also run the automatic solver for each approach studied, so that:
-    
+
     ./start.sh -m1
 
 will generate a new grid and solve it by using the first approach (check the **Approaches** section of this document) through the Lexicographic-Tree Server Dictionnary written in C language.
@@ -40,9 +40,9 @@ And finally you can execute the second approach to find all the words hidden wit
 
     ./start.sh -m2
 
-If you wanna have a visual comparison of the three strategies with execution times on the same automatically generated grid: 
+If you wanna have a visual comparison of the three strategies with execution times on the same automatically generated grid:
 
-    ./start.sh -s 
+    ./start.sh -s
 
 Here's an execution example of last command:
 
@@ -51,15 +51,15 @@ Here's an execution example of last command:
     \i/m\n/#\j/a\a/
       \p/*\e/n\q/
 
-    Methode 1 (Lexicographic-Server-Tree C) --> 
+    Methode 1 (Lexicographic-Server-Tree C) -->
     Execution Time ->  1.2251019477844238
     Mots Trouves: 467
 
-    Methode 1b (Lexicographic-Tree Python) --> 
+    Methode 1b (Lexicographic-Tree Python) -->
     Execution Time ->  7.571776866912842
     Mots Trouves: 467
 
-    Methode 2 (Python) --> 
+    Methode 2 (Python) -->
     Execution Time ->  47.429091691970825
     Mots Trouves: 467
 
@@ -67,7 +67,7 @@ Here's an execution example of last command:
 
 This project is a modified version of the [Ruzzle](https://fr.wikipedia.org/wiki/Ruzzle) videogame where you have to find the most of the words hidden inside the grid you can, and in a limited lapse of time.
 
-In this implementation the grid has exagonal shape instead of being square-shaped and cases can contain **walls** (`#` character), which cannot be used in the sequence of letters to form a **discovered word**, and **jolly** characters (`*`), which can be used as no matter the letter we need.   
+In this implementation the grid has exagonal shape instead of being square-shaped and cases can contain **walls** (`#` character), which cannot be used in the sequence of letters to form a **discovered word**, and **jolly** characters (`*`), which can be used as no matter the letter we need.
 
 ## Algorithms
 
@@ -83,7 +83,7 @@ A **Graph** has been used to modelize the grid characters while the dictionary a
 
 A **Depth-First-Search** algorithm has been used on the graph and on the tree to read the dictionnary and walk through all the possible combinations of neighboor characaters in the graph.
 
-As predicted, the first approach results more performant than the second one (you may want to verify the informations executing with `-s option`). As an attempt to increase again performances, an implementation of the dictionary as a local Server written in C language has replaced the one written in Python (`-m1 option`). 
+As predicted, the first approach results more performant than the second one (you may want to verify the informations executing with `-s option`). As an attempt to increase again performances, an implementation of the dictionary as a local Server written in C language has replaced the one written in Python (`-m1 option`).
 
 With success, an ulterior gain in performances was so obtained by dividing the tasks in a distributed system and exploiting on the dictionnary side the execution speed of C language (the main program and the dictionnary communicate thanks to Server-Client model).
 
