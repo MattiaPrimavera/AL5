@@ -9,59 +9,59 @@ Ruzzle Implementation with Algorithm performance study
 
 ## Usage
 
-    chmod +x start.sh
+	chmod +x start.sh
 
 To execute the single player mode use the following command:
 
-    ./start.sh
+	./start.sh
 
 The exagonal grid will appear and you'll be prompted to choose how many seconds you want the challenge to last: find all the words you can by writing them one by one on your keyboard and validating through the `Enter` key.
 
 For the multiplayer (local) mode, run the server:
 
-    ./start.sh -server tcpServerPort
+	./start.sh -server tcpServerPort
 
 then the client in another terminal window:
 
-    ./start.sh -client serverAddress tcpPort
+	./start.sh -client serverAddress tcpPort
 
 You can also run the automatic solver for each approach studied, so that:
 
-    ./start.sh -m1
+	./start.sh -m1
 
 will generate a new grid and solve it by using the first approach (check the **Approaches** section of this document) through the Lexicographic-Tree Server Dictionnary written in C language.
 By executing
 
-    ./start.sh -m1b
+	./start.sh -m1b
 
 the grid will still be solved by using the first approach but this time through the Lexicographic-Tree written in Python language.
 
 And finally you can execute the second approach to find all the words hidden with (this time the entire solution has been written in Python):
 
-    ./start.sh -m2
+	./start.sh -m2
 
 If you wanna have a visual comparison of the three strategies with execution times on the same automatically generated grid:
 
-    ./start.sh -s
+	./start.sh -s
 
 Here's an execution example of last command:
 
-      /e\s/o\t/a\
-    /f\l/c\s/s\a/t\
-    \i/m\n/#\j/a\a/
-      \p/*\e/n\q/
+	  /e\s/o\t/a\
+	/f\l/c\s/s\a/t\
+	\i/m\n/#\j/a\a/
+	  \p/*\e/n\q/
 
-    Methode 1 (Lexicographic-Server-Tree C) -->
-    Execution Time ->  1.2251019477844238
-    Mots Trouves: 467
+	Methode 1 (Lexicographic-Server-Tree C) -->
+	Execution Time ->  1.2251019477844238
+	Mots Trouves: 467
 
-    Methode 1b (Lexicographic-Tree Python) -->
-    Execution Time ->  7.571776866912842
-    Mots Trouves: 467
+	Methode 1b (Lexicographic-Tree Python) -->
+	Execution Time ->  7.571776866912842
+	Mots Trouves: 467
 
-    Methode 2 (Python) -->
-    Execution Time ->  47.429091691970825
-    Mots Trouves: 467
+	Methode 2 (Python) -->
+	Execution Time ->  47.429091691970825
+	Mots Trouves: 467
 
 ## Synopsis
 
