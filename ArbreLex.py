@@ -125,4 +125,3 @@ class Noeud:
         self.car = car
         self.fils = fils
         self.frere = frere
-
