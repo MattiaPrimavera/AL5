@@ -81,7 +81,7 @@ Two approaches have been studied here: one is to compare each possible combinati
 
 A **Graph** has been used to modelize the grid characters while the dictionary as been implemented as a **Lexicographic-Tree** (A tree where each node is a letter, which increases performances when checking if a word is inside the dictionary). A Customized **List** Object handles the list of words found in the current grid, ordering them according to their length, in order to fasten up the process of checking the presence of a word into the list.
 
-A **Depth-First-Search** algorithm has been used on the graph and on the tree to read the dictionnary and walk through all the possible combinations of neighboor characaters in the graph.
+A [Depth-First-Search](https://en.wikipedia.org/wiki/Depth-first_search) algorithm has been used on the graph and on the tree to read the dictionnary and walk through all the possible combinations of neighboor characaters in the graph.
 
 As predicted, the first approach results more performant than the second one (you may want to verify the informations executing with `-s option`). As an attempt to increase again performances, an implementation of the dictionary as a local Server written in C language has replaced the one written in Python (`-m1 option`).
 
