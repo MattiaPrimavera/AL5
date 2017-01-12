@@ -4,9 +4,9 @@ Ruzzle Implementation with Algorithm performance study
 
 ## Synopsis
 
-This project is a modified version of the [Ruzzle](https://fr.wikipedia.org/wiki/Ruzzle) videogame where you have to find the most of the words hidden inside the grid you can, and in a limited lapse of time.
+This project is a modified version of the [Ruzzle](https://fr.wikipedia.org/wiki/Ruzzle) videogame where you have to find the most of the hidden words inside the grid you can, and that in a limited lapse of time.
 
-In this implementation the grid has exagonal shape instead of being square-shaped and cases can contain **walls** (`#` character), which cannot be used in the sequence of letters to form a **discovered word**, and **jolly** characters (`*`), which can be used as no matter the letter we need.
+In this implementation the grid has exagonal shape instead of being square-shaped and cases can contain **walls** (`#` character), which cannot be used in the sequence of letters to form a **discovered word**, and **jolly** characters (`*`), which can be used as whatever letter we need.
 
 ## Algorithms
 
@@ -24,7 +24,7 @@ Two approaches have been studied here:
 - **Lexicographic-Tree**: A tree where each node is a letter, which increases performances when checking if a word is inside the dictionary (search operations)
 - A Customized **List** Object handles the list of words found in the current grid, ordering them according to their length, in order to fasten up the process of checking the presence of a word into the list
 
-- [Depth-First-Search](https://en.wikipedia.org/wiki/Depth-first_search) algorithm has been used on the graph and on the tree to read the dictionnary and walk through all the possible combinations of neighboor characaters in the graph.
+- [**Depth-First-Search**](https://en.wikipedia.org/wiki/Depth-first_search) algorithm has been used on the graph and on the tree to read the dictionnary and walk through all the possible combinations of neighboor characaters in the graph.
 
 ### Study Conclusions
 
